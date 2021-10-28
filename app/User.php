@@ -2,9 +2,8 @@
 
 namespace App;
 
-use App\Models\Work;
-use App\Scopes\AuthScope;
-use App\Scopes\AuthUserScope;
+use App\Models\Reservation;
+use App\Models\ReservationDetail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +19,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array   
      */
     // protected $fillable = [
     //     'name', 'email', 'password',
@@ -45,30 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function work()
-    {
-        return $this->hasMany(Work::class);
+        
+    public function reservations(){
+        return $this->hasMany(Reservation::class,);
     }
-
-    public function latestWork()
-    {
-        return $this->hasOne(Work::class)->latest();
-    }
-    public function allSum($col)
-    {
-        return $this->work->sum($col);
-    }
-
-    public function scopeActive($query)
-    {
-
-        if (auth()->user()->type == 1 && auth()->user()->id == 1) {
-            $query->where('id', '>=', 1);
-        } else if (auth()->user()->type == 1) {
-            $query->where('id', '>', 1);
-        } else {
-            $query->where('id', auth()->user()->id);
-        }
+    
+    public function reservationsDetail(){
+        return $this->hasMany(ReservationDetail::class, Reservation::class);
     }
 }
