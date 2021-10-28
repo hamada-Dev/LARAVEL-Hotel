@@ -66,7 +66,8 @@ Route::group(
             Route::resource('rooms', 'RoomController');
 
             Route::resource('reservations', 'ReservationController');
-            Route::resource('reservationdetails', 'ReservationController');
+
+            Route::resource('reservationdetails', 'ReservationDetailController');
             
         });
     }

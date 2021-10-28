@@ -7,10 +7,15 @@ use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 use App\Models\ReservationDetail;
 use App\Models\Room;
+use App\Traits\CheckRoomTrait;
 use Illuminate\Http\Request;
 
 class ReservationController extends BackEndController
-{
+{   
+    use CheckRoomTrait{
+        CheckRoomTrait::__construct as private __checkRoomConstruct;
+    }
+
     protected $room;
     protected $reserveDetail;
     public function __construct(Reservation $model, Room $room, ReservationDetail $reserveDetail)
@@ -18,6 +23,7 @@ class ReservationController extends BackEndController
         parent::__construct($model);
         $this->room             = $room;
         $this->reserveDetail    = $reserveDetail;
+        $this->__checkRoomConstruct($room, $reserveDetail);
     }
 
 
@@ -88,29 +94,5 @@ class ReservationController extends BackEndController
     public function destroy($id, Request $request)
     {
         return 'time ';
-    }
-
-    protected function checkRoomPlace($request)
-    {
-        $from = date('Y-m-d', strtotime($request->start_at));
-        $to   = date('Y-m-d', strtotime($request->end_at));
-
-        $num =  $this->reserveDetail
-            ->where('room_id', $request->room_id)
-            ->whereBetween('start_at',  [$from, $to])
-            ->OrwhereBetween('end_at',  [$from, $to])
-            ->get()->sum('person_number');
-
-        return $num;
-    }
-
-    protected function checkAvilablePlaceInThisDate($personNum, $roomId)
-    {
-        $maxNumebrOfPerson = $this->room->find($roomId);
-        $data = ['avilable' => 0, 'status' => false, 'max_person' => $maxNumebrOfPerson->person_number, 'room_price' => $maxNumebrOfPerson->room_price, 'person_price' => $maxNumebrOfPerson->person_price];
-        if ($personNum < $maxNumebrOfPerson->person_number) {
-            $data = ['avilable' => $maxNumebrOfPerson->person_number - $personNum, 'status' => true, 'max_person' => $maxNumebrOfPerson->person_number, 'room_price' => $maxNumebrOfPerson->room_price, 'person_price' => $maxNumebrOfPerson->person_price];
-        }
-        return $data;
     }
 }

@@ -68,15 +68,15 @@
                     </thead>
 
                     <tbody>
-                        @foreach($rows->reservationsDetails as $index=>$row)
+                        @foreach($rows as $index => $row)
                         <tr>
                             <td>{{++$index}}</td>
-                            <td>{{$row->reservation->client->name}}</td>
+                            <td>{{$row->reservation->user->name}}</td>
                             <td>{{$row->reservation->paid}}</td>
 
                             <td>{{$row->price}}</td>
                             <td>{{$row->person_number}}</td>
-                            <td>{{$row->room}}</td>
+                            <td>{{$row->room->room_number}}</td>
                             <td>{{$row->start_at}}</td>
                             <td>{{$row->end_at}}</td>
 

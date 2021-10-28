@@ -54,6 +54,12 @@ return [
     'reservationdetail' => 'reservationdetail',
 
 
+    'client'            => 'client',
+    'paid'              => 'paid',
+    'price'             => 'price',
+    'from'              => 'from',
+    'to'                => 'to',
+
     'ar'    => [
         'name'        => 'arabic name ',
         'description' => ' arabic description ',

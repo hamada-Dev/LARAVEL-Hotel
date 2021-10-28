@@ -59,6 +59,7 @@
                             <th>@lang('site.created_at')</th>
 
                             <th>@lang('site.action')</th>
+                            
                         </tr>
                     </thead>
 
