@@ -19,11 +19,16 @@
                         class="fa fa-th"></i><span>@lang('site.dashboard')</span></a></li>
 
 
-          
-            @if (auth()->user()->hasPermission('read-types'))
-            <li><a href="{{ route('dashboard.types.index',) }}"><i
-                        class="fa fa-list"></i><span>@lang('site.types')</span></a></li>
+            @php
+            $asideArray = ['users', 'types', 'branches', 'features', 'rooms', 'reservations', 'reservationdetails']
+            @endphp
+
+            @foreach ($asideArray as $aside)
+            @if (auth()->user()->hasPermission('read-'.$aside))
+            <li><a href="{{ route('dashboard.'.$aside.'.index',) }}"><i
+                        class="fa fa-list"></i><span>@lang('site.'.$aside)</span></a></li>
             @endif
+            @endforeach
 
         </ul>
 

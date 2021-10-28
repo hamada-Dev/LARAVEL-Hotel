@@ -57,6 +57,8 @@ Route::group(
 
         Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
 
+            Route::resource('users', 'UserController');
+            
             Route::resource('types', 'TypeController');
             Route::resource('branches', 'BranchController');
             Route::resource('features', 'FeatureController');

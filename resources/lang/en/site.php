@@ -18,6 +18,31 @@ return [
 
     'dashboard'         => 'dashboard',
 
+    'users'             => 'users',
+    'user'              => 'user',
+
+
+    'types'             => 'types',
+    'type'              => 'type',
+
+
+    'branches'          => 'branches',
+    'branche'           => 'branche',
+
+
+    'rooms'             => 'rooms',
+    'room'              => 'room',
+
+    'features'          => 'features',
+    'feature'           => 'feature',
+
+
+    'reservations'      => 'reservations',
+    'reservation'       => 'reservation',
+
+
+    'reservationdetails'=> 'reservationdetails',
+    'reservationdetail' => 'reservationdetail',
 
 
 
