@@ -8,7 +8,8 @@ return [
             'branches'   => 'c,r,u,d',
             'rooms'      => 'c,r,u,d',
             'features'   => 'c,r,u,d',
-            'reservations'   => 'c,r,u,d',
+            'reservations'         => 'c,r,u,d',
+            'reservationdetails'   => 'c,r,u,d',
         ],
         // 'admin' => [
         //     'users'      => 'c,r,u,d',

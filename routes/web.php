@@ -58,6 +58,13 @@ Route::group(
         Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->group(function () {
 
             Route::resource('types', 'TypeController');
+            Route::resource('branches', 'BranchController');
+            Route::resource('features', 'FeatureController');
+
+            Route::resource('rooms', 'RoomController');
+
+            Route::resource('reservations', 'ReservationController');
+            Route::resource('reservationdetails', 'ReservationController');
             
         });
     }
