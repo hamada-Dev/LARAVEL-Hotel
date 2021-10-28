@@ -34,9 +34,12 @@ return [
     'branche'           => 'branche',
     'address'           => 'address',
 
-
     'rooms'             => 'rooms',
     'room'              => 'room',
+    'area'              => 'area',
+    'person_number'     => 'person_number',
+    'room_price'        => 'room_price',
+    'person_price'      => 'person_price',
 
     'features'          => 'features',
     'feature'           => 'feature',
@@ -48,8 +51,6 @@ return [
 
     'reservationdetails'=> 'reservationdetails',
     'reservationdetail' => 'reservationdetail',
-
-
 
 
     'ar'    => [

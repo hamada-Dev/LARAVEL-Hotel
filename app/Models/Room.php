@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $guarded = [];
+    protected $appends = ['feature_id_relation', 'image_path'];
+
+    
+    public function getImagePathAttribute(){
+        return $this->image != null ? asset('uploads/branch_images/'.$this->image) :  asset('uploads/branch_images/default.png') ;
+    } 
 
     public function responsible()
     {
@@ -20,5 +26,10 @@ class Room extends Model
 
     public function reservations(){
         return $this->belongsToMany(Reservation::class, ReservationDetail::class);
+    }
+
+    public function getFeatureIdRelationAttribute() // this is to return id of feature
+    {
+        return $this->features->pluck('id')->toArray();
     }
 }

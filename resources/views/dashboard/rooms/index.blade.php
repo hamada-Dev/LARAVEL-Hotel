@@ -54,8 +54,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>@lang('site.name')</th>
-                            <th>@lang('site.description')</th>
+                            <th>@lang('site.area')</th>
+                            <th>@lang('site.person_number')</th>
+                            <th>@lang('site.room_price')</th>
+                            <th>@lang('site.person_price')</th>
                             <th>@lang('site.image')</th>
                             <th>@lang('site.action')</th>
                         </tr>
@@ -65,8 +67,11 @@
                         @foreach($rows as $index=>$row)
                         <tr>
                             <td>{{++$index}}</td>
-                            <td>{{$row->name}}</td>
-                            <td>{{$row->description}}</td>
+                            <td>{{$row->area}}</td>
+                            <td>{{$row->person_number}}</td>
+                            <td>{{$row->room_price}}</td>
+                            <td>{{$row->person_price}}</td>
+
                             <td><img src="{{$row->image_path}}" alt="" width="150" height="100" srcset=""></td>
                             <td>
                                 @if (auth()->user()->hasPermission('update-'.$module_name_plural))

@@ -24,14 +24,17 @@ class RoomController extends  BackEndController
      */
     public function store(RoomReqest $request)
     {
-        $request_data             =  $request->except(['_token', 'image',]);
+        // return $request;
+        $request_data             =  $request->except(['_token', 'image', 'feature_id']);
         $request_data['added_by'] =  $this->userId;
 
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
         }
 
-        $this->model->create($request_data);
+        $room = $this->model->create($request_data);
+
+        $room->features()->attach($request->feature_id);
 
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
@@ -59,7 +62,7 @@ class RoomController extends  BackEndController
     public function update(RoomReqest $request, $id)
     {
         $room   = $this->model->findOrFail($id);
-        $request_data         =  $request->except(['_token', 'image',]);
+        $request_data         =  $request->except(['_token', 'image', 'feature_id']);
 
         if ($request->image) {
             if ($room->image != null) {
@@ -69,6 +72,9 @@ class RoomController extends  BackEndController
         } //end of if
 
         $room->update($request_data);
+        $room->features()->sync($request->feature_id);
+
+
         session()->flash('success', __('site.updated_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
