@@ -6,7 +6,7 @@
     <div class="form-group col-md-6">
         <div class="form-group">
             <label for="">@lang('site.type')</label>
-            <select class="form-control" name="type_id">
+            <select class="form-control @error('type_id') is-invalid @enderror" name="type_id">
                 <option value="">@lang('site.type')</option>
                 @foreach(App\Models\Type::get() as $type)
                 <option value="{{$type->id}}" {{ (isset($row) && $row->type_id == $type->id ) ? 'selected' : '' }}>
@@ -14,7 +14,11 @@
                 </option>
                 @endforeach
             </select>
-
+            @error('type_id')
+            <small class=" text text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </small>
+            @enderror
         </div>
     </div>
 
@@ -22,7 +26,7 @@
     <div class="form-group col-md-6">
         <div class="form-group">
             <label for="">@lang('site.branch')</label>
-            <select class="form-control" name="branch_id">
+            <select class="form-control  @error('branch_id') is-invalid @enderror" name="branch_id">
                 <option value="">@lang('site.branch')</option>
                 @foreach(App\Models\Branch::get() as $branch)
                 <option value="{{$branch->id}}" {{ (isset($row) && $row->branch_id == $branch->id ) ? 'selected' : ''
@@ -31,7 +35,11 @@
                 </option>
                 @endforeach
             </select>
-
+            @error('branch_id')
+            <small class=" text text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </small>
+            @enderror
         </div>
     </div>
 </div>
@@ -39,7 +47,7 @@
 
 
 @php
-    $roomColumns = ['area', 'person_number', 'room_price', 'person_price'];
+    $roomColumns = ['area', 'person_number', 'room_price', 'person_price', 'room_number'];
 @endphp
 
 <div class="row">

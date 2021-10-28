@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $guarded = [];
-    protected $appends = ['feature_id_relation', 'image_path'];
+    protected $appends = ['feature_id_relation', 'image_path', 'avilable_room'];
 
     
     public function getImagePathAttribute(){
@@ -28,8 +28,16 @@ class Room extends Model
         return $this->belongsToMany(Reservation::class, ReservationDetail::class);
     }
 
+    public function rexervationDetail(){
+        return $this->hasMany(ReservationDetail::class);
+    }
+
     public function getFeatureIdRelationAttribute() // this is to return id of feature
     {
         return $this->features->pluck('id')->toArray();
+    }
+
+    public function getAvilableRoomAttribute(){
+        return $this->rexervationDetail()->sum('person_number');
     }
 }

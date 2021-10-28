@@ -40,6 +40,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -47,6 +48,11 @@ class User extends Authenticatable
         
     public function reservations(){
         return $this->hasMany(Reservation::class,);
+    } 
+    
+    public function scopeClient($query)
+    {
+        return $query->where('status', 1);
     }
     
     public function reservationsDetail(){

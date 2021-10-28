@@ -10,6 +10,7 @@ return [
     'delete'            => 'delete',
     'action'            => 'action',
     'search'            => 'search',
+    'choose'            => 'choose',
 
     'confirm_delete'    => 'Confirm Delete',
     'Yes'               => 'Yes',

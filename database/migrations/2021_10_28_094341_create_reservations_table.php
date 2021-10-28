@@ -16,6 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->float('paid')->nullable();
 
             $table->integer('added_by')->nullable()->unsigned()->comment('how make this reservation admin or client');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade');
