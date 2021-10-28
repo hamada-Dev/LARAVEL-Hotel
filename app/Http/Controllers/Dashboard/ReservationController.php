@@ -34,21 +34,24 @@ class ReservationController extends BackEndController
 
         $checkVal      = $this->checkAvilablePlaceInThisDate($nuberOfPerson, $request->room_id);
 
-        if($checkVal['status']){
-            if($checkVal['avilable'] < $request->person_number){
-                return redirect()->back()->withInput()->with(['error' => "you want to Reservation $request->person_number and avilabel is {$checkVal['avilable']} "  ]);
-            } 
-        }else{
-            return redirect()->back()->withInput()->with(['error' => "you want to Reservation $request->person_number and avilabel is {$checkVal['avilable']} "  ]);
-        }       
+        if ($checkVal['status']) {
+            if ($checkVal['avilable'] < $request->person_number) {
+                return redirect()->back()->withInput()->with(['error' => "you want to Reservation $request->person_number and avilabel is {$checkVal['avilable']} "]);
+            }
+        } else {
+            return redirect()->back()->withInput()->with(['error' => "you want to Reservation $request->person_number and avilabel is {$checkVal['avilable']} "]);
+        }
 
-        return $request;
 
         $request_reserve             =  $request->only(['user_id', 'paid']);
         $request_reserve['added_by'] =  $this->userId;
+        if ($request->image) {
+            $request_reserve['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
+        }
+
 
         $request_reserve_detail            =  $request->only(['room_id', 'person_number', 'start_at', 'end_at',]);
-        $request_reserve_detail['price']   = 99;
+        $request_reserve_detail['price']   = $request->person_number == $checkVal['max_person'] ? $checkVal['room_price'] : $checkVal['person_price'] * $request->person_number;
 
         $reserve = $this->model->create($request_reserve);
 
@@ -79,30 +82,12 @@ class ReservationController extends BackEndController
      */
     public function update(ReservationRequest $request, $id)
     {
-        $type   = $this->model->findOrFail($id);
-        $request_data         =  $request->except(['_token', 'image',]);
-
-        if ($request->image) {
-            if ($type->image != null) {
-                $this->deleteImage($this->getSingularModelName(), $type->image);
-            }
-            $request_data['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
-        } //end of if
-
-        $type->update($request_data);
-        session()->flash('success', __('site.updated_successfuly'));
-        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        return 'time ';
     }
 
     public function destroy($id, Request $request)
     {
-        $type = $this->model->findOrFail($id);
-        if ($type->image != null) {
-            $this->deleteImage($this->getSingularModelName(), $type->image);
-        }
-        $type->delete();
-        session()->flash('success', __('site.deleted_successfuly'));
-        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        return 'time ';
     }
 
     protected function checkRoomPlace($request)
@@ -119,11 +104,12 @@ class ReservationController extends BackEndController
         return $num;
     }
 
-    protected function checkAvilablePlaceInThisDate($personNum, $roomId){
-        $maxNumebrOfPerson = $this->room->find($roomId)->person_number;
-        $data = ['avilable' => 0 , 'status' => false];
-        if($personNum < $maxNumebrOfPerson){
-            $data = ['avilable' => $maxNumebrOfPerson - $personNum, 'status' => true];  
+    protected function checkAvilablePlaceInThisDate($personNum, $roomId)
+    {
+        $maxNumebrOfPerson = $this->room->find($roomId);
+        $data = ['avilable' => 0, 'status' => false, 'max_person' => $maxNumebrOfPerson->person_number, 'room_price' => $maxNumebrOfPerson->room_price, 'person_price' => $maxNumebrOfPerson->person_price];
+        if ($personNum < $maxNumebrOfPerson->person_number) {
+            $data = ['avilable' => $maxNumebrOfPerson->person_number - $personNum, 'status' => true, 'max_person' => $maxNumebrOfPerson->person_number, 'room_price' => $maxNumebrOfPerson->room_price, 'person_price' => $maxNumebrOfPerson->person_price];
         }
         return $data;
     }

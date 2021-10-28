@@ -56,19 +56,29 @@
                             <th>#</th>
                             <th>@lang('site.client')</th>
                             <th>@lang('site.paid')</th>
-                            <th>@lang('site.created_at')</th>
+
+                            <th>@lang('site.price')</th>
+                            <th>@lang('site.person_number')</th>
+                            <th>@lang('site.room')</th>
+                            <th>@lang('site.from')</th>
+                            <th>@lang('site.to')</th>
 
                             <th>@lang('site.action')</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($rows as $index=>$row)
+                        @foreach($rows->reservationsDetails as $index=>$row)
                         <tr>
                             <td>{{++$index}}</td>
-                            <td>{{$row->user->name}}</td>
-                            <td>{{$row->paid}}</td>
-                            <td>{{$row->created_at}}</td>
+                            <td>{{$row->reservation->client->name}}</td>
+                            <td>{{$row->reservation->paid}}</td>
+
+                            <td>{{$row->price}}</td>
+                            <td>{{$row->person_number}}</td>
+                            <td>{{$row->room}}</td>
+                            <td>{{$row->start_at}}</td>
+                            <td>{{$row->end_at}}</td>
 
                             <td>
                                 @if (auth()->user()->hasPermission('update-'.$module_name_plural))

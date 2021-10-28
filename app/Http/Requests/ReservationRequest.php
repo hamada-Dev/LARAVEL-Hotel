@@ -31,6 +31,7 @@ class ReservationRequest extends FormRequest
             'paid'             => 'nullable|integer|min:1',
             'start_at'         => 'required|date|min:1',
             'end_at'           => 'required|date|after:start_at',
+            'image'            => 'nullable|image',
         ];
 
         return $rules;
