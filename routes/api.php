@@ -30,6 +30,15 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api',], function () {
 
 });
 
+
 Route::group(['namespace' => 'Api', 'middleware' => 'guest:api'], function () {
 
+    Route::get('aya', function(){
+        return 'aaa';
+    });
+
+    Route::get('branch', 'BranchController@index');
+
+    Route::get('room/{id}', 'RoomController@show');
+    Route::get('room', 'RoomController@index');
 });

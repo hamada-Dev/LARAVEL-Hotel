@@ -18,6 +18,16 @@ class Room extends Model
     {
         return $this->belongsTo(User::class, 'added_by');
     }
+    
+    public function branches()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    } 
+    
+    public function types()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
 
     
     public function features(){
