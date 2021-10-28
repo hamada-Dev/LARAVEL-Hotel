@@ -26,11 +26,11 @@ class CreateRoomsTable extends Migration
             $table->float('person_price')->nullable()->comment('price for clinet in room if room has many bed && clinet want one');
             
             
-            $table->tinyInteger('status')->nullable()->comment('room status ( status == null ? avilable : have number of person resive ) ');
+            // $table->tinyInteger('status')->nullable()->comment('room status ( status == null ? avilable : have number of person resive ) ');
 
 
             $table->integer('branch_by')->nullable()->unsigned();
-            $table->foreign('branch_by')->references('id')->on('branchs')->onDelete('cascade');
+            $table->foreign('branch_by')->references('id')->on('branches')->onDelete('cascade');
           
             $table->integer('type_by')->nullable()->unsigned();
             $table->foreign('type_by')->references('id')->on('types')->onDelete('cascade');

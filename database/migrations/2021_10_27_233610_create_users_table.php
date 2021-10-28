@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->tinyInteger('type')->default(0)->comment('0=> show his data only 1=> show all data');
+            $table->tinyInteger('status')->default(1)->comment('0=> admin 1=> client');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -23,7 +23,7 @@ class CreateBranchTranslationsTable extends Migration
             $table->text('address')->nullable();
 
             $table->unique(['branch_id', 'locale']);
-            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

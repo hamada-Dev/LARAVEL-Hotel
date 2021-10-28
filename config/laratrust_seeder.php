@@ -5,13 +5,16 @@ return [
         'super' => [
             'users'      => 'c,r,u,d',
             'types'      => 'c,r,u,d',
+            'branches'   => 'c,r,u,d',
+            'rooms'      => 'c,r,u,d',
+            'features'   => 'c,r,u,d',
+            'reservations'   => 'c,r,u,d',
         ],
         // 'admin' => [
-        //     'categories' => 'c,r,u,d',
-        //     'owners' => 'c,r,u,d',
+        //     'users'      => 'c,r,u,d',
         // ],
         // 'user' => [
-        //     'owners' => 'r,u'
+        //     'users'      => 'c,r,u,d',
         // ],
         'new_per' => [],
     ],
