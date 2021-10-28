@@ -56,30 +56,30 @@ class BranchController extends  BackEndController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BranchRequest $request, $id)
     {
-        $type   = $this->model->findOrFail($id);
+        $branch   = $this->model->findOrFail($id);
         $request_data         =  $request->except(['_token', 'image',]);
 
         if ($request->image) {
-            if ($type->image != null) {
-                $this->deleteImage($this->getSingularModelName(), $type->image);
+            if ($branch->image != null) {
+                $this->deleteImage($this->getSingularModelName(), $branch->image);
             }
             $request_data['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
         } //end of if
 
-        $type->update($request_data);
+        $branch->update($request_data);
         session()->flash('success', __('site.updated_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
     public function destroy($id, Request $request)
     {
-        $type = $this->model->findOrFail($id);
-        if ($type->image != null) {
-            $this->deleteImage($this->getSingularModelName(), $type->image);
+        $branch = $this->model->findOrFail($id);
+        if ($branch->image != null) {
+            $this->deleteImage($this->getSingularModelName(), $branch->image);
         }
-        $type->delete();
+        $branch->delete();
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }

@@ -3,29 +3,18 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeatureRequest;
+use App\Models\Feature;
 use Illuminate\Http\Request;
 
-class FeatureController extends Controller
+class FeatureController extends BackEndController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct(Feature $model)
     {
-        //
+        parent::__construct($model);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +22,19 @@ class FeatureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeatureRequest $request)
     {
-        //
+        $request_data             =  $request->except(['_token', 'image',]);
+        $request_data['added_by'] =  $this->userId;
+
+        if ($request->image) {
+            $request_data['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
+        }
+
+        $this->model->create($request_data);
+
+        session()->flash('success', __('site.add_successfuly'));
+        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
     /**
@@ -49,16 +48,6 @@ class FeatureController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,19 +56,31 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeatureRequest $request, $id)
     {
-        //
+        $type   = $this->model->findOrFail($id);
+        $request_data         =  $request->except(['_token', 'image',]);
+
+        if ($request->image) {
+            if ($type->image != null) {
+                $this->deleteImage($this->getSingularModelName(), $type->image);
+            }
+            $request_data['image'] = $this->uploadImage($this->getSingularModelName(), $request->image);
+        } //end of if
+
+        $type->update($request_data);
+        session()->flash('success', __('site.updated_successfuly'));
+        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $type = $this->model->findOrFail($id);
+        if ($type->image != null) {
+            $this->deleteImage($this->getSingularModelName(), $type->image);
+        }
+        $type->delete();
+        session()->flash('success', __('site.deleted_successfuly'));
+        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 }

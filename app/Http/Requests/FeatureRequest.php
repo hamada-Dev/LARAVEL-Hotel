@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class BranchRequest extends FormRequest
+class FeatureRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,9 +31,8 @@ class BranchRequest extends FormRequest
 
                     foreach (config('translatable.locales') as $locale) {
                         $rules += [
-                            $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('branch_translations', 'name')],
-                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('branch_translations', 'description')],
-                            $locale . '.address'     => ['required', 'string', 'min:3', 'max:250', Rule::unique('branch_translations', 'address')],
+                            $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('feature_translations', 'name')],
+                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('feature_translations', 'description')],
                         ];
                     }
 
@@ -46,9 +45,8 @@ class BranchRequest extends FormRequest
             case 'PATCH': {
                     foreach (config('translatable.locales') as $locale) {
                         $rules += [
-                            $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('branch_translations', 'name')->ignore($this->branch, 'branch_id')],
-                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('branch_translations', 'description')->ignore($this->branch, 'branch_id')],
-                            $locale . '.address'     => ['required', 'string', 'min:3', 'max:250', Rule::unique('branch_translations', 'address')->ignore($this->address, 'branch_id')],
+                            $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('feature_translations', 'name')->ignore($this->feature, 'feature_id')],
+                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('feature_translations', 'description')->ignore($this->feature, 'feature_id')],
                         ];
                     }
 

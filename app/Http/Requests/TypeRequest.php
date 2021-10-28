@@ -32,7 +32,7 @@ class TypeRequest extends FormRequest
                     foreach (config('translatable.locales') as $locale) {
                         $rules += [
                             $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('type_translations', 'name')],
-                            $locale . '.description' => ['required', 'string', 'min:3', 'max:250', Rule::unique('type_translations', 'description')],
+                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('type_translations', 'description')],
                         ];
                     }
 
@@ -46,7 +46,7 @@ class TypeRequest extends FormRequest
                     foreach (config('translatable.locales') as $locale) {
                         $rules += [
                             $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('type_translations', 'name')->ignore($this->type, 'type_id')],
-                            $locale . '.description' => ['required', 'string', 'min:3', 'max:250', Rule::unique('type_translations', 'description')->ignore($this->type, 'type_id')],
+                            $locale . '.description' => ['required', 'string', 'min:3', 'max:1500', Rule::unique('type_translations', 'description')->ignore($this->type, 'type_id')],
                         ];
                     }
 
