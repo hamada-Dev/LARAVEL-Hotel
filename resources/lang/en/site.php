@@ -11,6 +11,10 @@ return [
     'action'            => 'action',
     'search'            => 'search',
 
+    'confirm_delete'    => 'Confirm Delete',
+    'Yes'               => 'Yes',
+    'No'                => 'No',
+
 
     'name'              => 'name',
     'description'       => 'description',
@@ -28,6 +32,7 @@ return [
 
     'branches'          => 'branches',
     'branche'           => 'branche',
+    'address'           => 'address',
 
 
     'rooms'             => 'rooms',
@@ -50,6 +55,7 @@ return [
     'ar'    => [
         'name'        => 'arabic name ',
         'description' => ' arabic description ',
+        'address'     => ' arabic address  ',
         'question'    => 'arabic question',
         'answer'      => 'arabic answer',
         'about_us'           => 'arabic about_us',
@@ -60,6 +66,7 @@ return [
     'en'    => [
         'name'        => 'english name ',
         'description' => 'english description ',
+        'address'     => 'english address  ',
         'question'    => 'english question',
         'answer'      => 'english answer',
         'about_us'           => 'english about_us',
