@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://github.com/hamada-Dev/LARAVEL-Hotel/" target="_blank"><img src="https://github.com/hamada-Dev/LARAVEL-Hotel/blob/master/1.PNG" width="100%"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -7,54 +7,171 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## About Project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+it is required to make a 3-Tier Booking System for a Hotel that has several branches. 
+The application should be composed of the following components.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Booking Database (SQL Server)
+2. Web service (API) to have all the logic of the system, e.g. find availability for the 
+selected time, book, cancel, update the DB with the booked or cancelled room(s). 
+(.Net/ C#)
+3. Application interface Back-end (ASP.Net MVC/C#), this should NOT have any logic 
+and should only communicate with the Web service (API).
+4. Application interface Front-end (HTML, CSS, Bootstrap, JavaScript, jQuery)
+5. A report-like page to display all the rooms in the hotel and their status, e.g., booked, 
+available. This page should authenticate the user before displaying the report.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## install 
+- **Install Xampp to you pc and run it**
+- **open partion C:\xampp\htdocs\**
+- **open cmd**
+```
+git clone https://github.com/hamada-Dev/LARAVEL-Hotel.git
+```
+- **then run**
+```
+composer update
+```
+- **then run**
+```
+cp .env.example .env
+```
+- **open phpMyAdmin and create Database**
+- **add username and password in .env file**
+```
+DB_DATABASE=hotel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- **run this commend to create DB**
+```
+php artisan migrate:fresh --seed
+```
+```
+php artisan serve
+```
+- **open browser**
+- ``http://127.0.0.1:8000/``
+- **login to admin with**
+```
+username : super@eg.com
+password : 12345
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## the stages
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **understand business requirements**
+- **Define a proper ER Model**
+- **Database Design**
+- **Application Model**
+- **Application Controller**
+- **Application View**
+- **Application interface Front-end 
+(HTML, CSS, Bootstrap, JavaScript, 
+jQuery)**
 
-## Laravel Sponsors
+- **Application Api**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Application Api
+- **login**
+```
+http://127.0.0.1:8000/api/auth/login
+-### Request
+        username : super@eg.com
+        password : 12345
+ - ##Response
+ {
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzNTQ3NzkzNiwiZXhwIjoxNjM1NDgxNTM2LCJuYmYiOjE2MzU0Nzc5MzYsImp0aSI6InJpVGhQNWdpR1dkV0tWWDAiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.XMVtzYMerQhreGKRyA1PYIwJdAz31xa4qZOCt4bcNGM",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+```
+http://127.0.0.1:8000/api/auth/me
+{
+    "id": 1,
+    "name": "Super",
+    "email": "super@eg.com",
+    "phone": null,
+    "email_verified_at": null,
+    "image": null,
+    "status": 0,
+    "created_at": "2021-10-28T13:48:13.000000Z",
+    "updated_at": "2021-10-28T13:48:13.000000Z",
+    "image_path": "http://127.0.0.1:8000/uploads/user_images/default.png"
+}
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+```
+http://127.0.0.1:8000/api/branch
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "updated_at": "8 hours ago",
+            "translate": [
+                {
+                    "locale": "ar",
+                    "name": "فرع مدينه نصر ",
+                    "description": "الفرع الاول من الفندق 5 نجوم"
+                },
+                {
+                    "locale": "en",
+                    "name": "Nasr City Branch",
+                    "description": "The first branch of the hotel is 5 stars"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "updated_at": "8 hours ago",
+            "translate": [
+                {
+                    "locale": "ar",
+                    "name": " فرع مدينه العاشر ",
+                    "description": "الفرع الثاني من الفندق 5 نجوم"
+                },
+                {
+                    "locale": "en",
+                    "name": "10th City Branch",
+                    "description": "The second branch of the hotel is 5 stars"
+                }
+            ]
+        }
+    ],
+    "message": "success"
+}
+```
+```
+http://127.0.0.1:8000/api/reservation
+- **Request**
+   {
+    "reservationData" : [
+                {
+                    "room_id"       : 1,
+                    "person_number" : 2,
+                    "start_at"      : "2021-11-15",
+                    "end_at"        : "2021-12-5"
+                }, 
+                   {
+                    "room_id"       : 2,
+                    "person_number" : 1,
+                    "start_at"      : "2021-11-1",
+                    "end_at"        : "2021-11-10"
+                }
+            ],
+        "userData" :
+                {
+                    "user_id"  : 2,
+                    "paid"     : 1700
+                }
+}
+```
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
