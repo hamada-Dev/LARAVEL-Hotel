@@ -21,9 +21,9 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>77</h3>
+                            <h3>{{ App\User::client()->count() ?? 0 }}</h3>
 
-                            <p>@lang('site.categories')</p>
+                            <p>@lang('site.user')</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -36,9 +36,9 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{ App\Models\Branch::count() ?? 0 }}</h3>
 
-                            <p>@lang('site.products')</p>
+                            <p>@lang('site.branches')</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -51,9 +51,9 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>88</h3>
+                            <h3>{{ App\Models\Room::count() ?? 0 }}</h3>
 
-                            <p>@lang('site.clients')</p>
+                            <p>@lang('site.room')</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-user"></i>
@@ -66,9 +66,9 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>22</h3>
+                            <h3>{{ App\Models\Type::count() ?? 0 }}</h3>
 
-                            <p>@lang('site.users')</p>
+                            <p>@lang('site.types')</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>

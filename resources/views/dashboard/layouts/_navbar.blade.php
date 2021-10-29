@@ -99,14 +99,14 @@
                 <li class="dropdown user user-menu">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="X" class="user-image" alt="User Image">
+                        <img src="{{ auth()->user()->image_path }}" class="user-image" alt="User Image">
                         <span class="hidden-xs">{{auth()->user()->name . ' ' . auth()->user()->name}}</span>
                     </a>
                     <ul class="dropdown-menu">
 
                         {{--<!-- User image -->--}}
                         <li class="user-header">
-                            <img src="X" class="img-circle" alt="User Image">
+                            <img src="{{ auth()->user()->image_path }}" class="img-circle" alt="User Image">
 
                             <p>
                                 {{auth()->user()->name . ' ' . auth()->user()->name}}

@@ -179,9 +179,8 @@ return [
         // laratrust 
         Laratrust\LaratrustServiceProvider::class,
 
-        //laravel-filemanager
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
     ],
 
     /*
@@ -236,8 +235,6 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         // laratrust
         'Laratrust'   => Laratrust\LaratrustFacade::class,
-
-        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -14,35 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-
-//     return $request->user();
-// });
 
 
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Api',], function () {
 
-    Route::get('this', function () {
-        return 'thisiisiisiis';
-    });
 
-    Route::post('logout', 'CategoryController@logoutApi'); // this is for logout
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth',
+    'namespace' => 'Api',
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 });
 
 
-Route::group(['namespace' => 'Api', 'middleware' => 'guest:api'], function () {
 
-    Route::get('aya', function(){
-        return 'aaa';
-    });
+Route::group(['namespace' => 'Api', 'middleware' => 'guest:api',], function () {
 
     Route::get('branch', 'BranchController@index');
 
     Route::get('room/{id}', 'RoomController@show');
 
-    Route::get('room', 'RoomController@index');    
+    Route::get('room', 'RoomController@index');
 
     Route::resource('reservation', 'ReservationController');
-    
 });
