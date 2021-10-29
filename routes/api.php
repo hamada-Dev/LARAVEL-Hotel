@@ -40,5 +40,9 @@ Route::group(['namespace' => 'Api', 'middleware' => 'guest:api'], function () {
     Route::get('branch', 'BranchController@index');
 
     Route::get('room/{id}', 'RoomController@show');
-    Route::get('room', 'RoomController@index');
+
+    Route::get('room', 'RoomController@index');    
+
+    Route::resource('reservation', 'ReservationController@index');
+    
 });

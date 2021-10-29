@@ -22,11 +22,20 @@ class RoomController extends BaseController
     public function index()
     {
         $roomes = $this->model->with('types', 'branches', 'features')->get();
-        
+
         // return $roomes;
 
         $roomes = RoomResource::collection($roomes);
 
         return $this->returnResponse($roomes);
-    } 
+    }
+
+    public function show($id)
+    {
+        $roomes = $this->model->with('types', 'branches', 'features')->where('id', $id)->get();
+
+        $roomes = RoomResource::collection($roomes);
+
+        return $this->returnResponse($roomes);
+    }
 }
