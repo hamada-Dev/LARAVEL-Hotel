@@ -73,7 +73,11 @@ class ReservationController extends BaseController
             try {
                 DB::beginTransaction();
 
-                $reserve = $this->model->create(['user_id' => 1, 'paid' => $reserveJson['userData']['paid']]);
+                $reserve = $this->model->create([
+                    'user_id' => 1,
+                    'paid' => $reserveJson['userData']['paid'],
+                    // 'discount'  => 
+                ]);
 
                 foreach ($reserveJson['reservationData'] as $index => $request) {
                     $reserve->reservationsDetails()->create([
