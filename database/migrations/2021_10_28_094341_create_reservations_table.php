@@ -18,6 +18,8 @@ class CreateReservationsTable extends Migration
 
             $table->float('paid')->nullable();
             $table->string('image')->nullable();
+            
+            $table->double('discount')->nullable();
 
             $table->integer('added_by')->nullable()->unsigned()->comment('how make this reservation admin or client');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade');

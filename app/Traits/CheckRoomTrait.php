@@ -19,11 +19,11 @@ trait CheckRoomTrait{
 
     public function checkRoomPlace($request)
     {
-        $from = date('Y-m-d', strtotime($request->start_at));
-        $to   = date('Y-m-d', strtotime($request->end_at));
+        $from = date('Y-m-d', strtotime($request['start_at']));
+        $to   = date('Y-m-d', strtotime($request['end_at']));
 
         $num =  $this->reserveDetail
-            ->where('room_id', $request->room_id)
+            ->where('room_id', $request['room_id'])
             ->whereBetween('start_at',  [$from, $to])
             ->OrwhereBetween('end_at',  [$from, $to])
             ->get()->sum('person_number');
